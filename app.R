@@ -80,13 +80,13 @@ ui <- fluidPage(
            hr(),
 
            # 2. Estadísticas Descriptivas
-           h4("Estadísticas de Polígonos VISIBLES:"),
+           h4("Estadísticas de Radios Censales visibles:"),
            DTOutput("estadisticas_globales"),
 
            hr(),
 
            # 3. Valor para el Polígono Seleccionado
-           h4("Valor del Polígono Seleccionado:"),
+           h4("Valor del Radio Censal seleccionado:"),
            DTOutput("valor_seleccionado")
     )
   )
@@ -225,8 +225,9 @@ server <- function(input, output, session) {
       as.numeric()
 
     stats <- data.frame(
-      Estadística = c("Media", "Mediana", "Mínimo", "Máximo", "Desv. Estándar", "N (Visible)"),
+      Estadística = c("Total", "Media", "Mediana", "Mínimo", "Máximo", "Desv. Estándar", "Radios (visibles)"),
       Valor = c(
+        sum(datos_var, na.rm = TRUE),
         mean(datos_var, na.rm = TRUE),
         median(datos_var, na.rm = TRUE),
         min(datos_var, na.rm = TRUE),
